@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 
-export default function Dashboard() {
+export default function Dashboard({ setIsAuthenticated }) {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    setIsAuthenticated(false); // ✅ Tell App user logged out
+    setIsAuthenticated(false);
     navigate("/", { replace: true });
   };
 
