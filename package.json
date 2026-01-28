@@ -20,5 +20,8 @@
   "homepage": "https://github.com/redsmite/wrus-portal-nodejs#readme",
   "devDependencies": {
     "concurrently": "^9.2.1"
+  },
+  "dependencies": {
+    "mariadb": "^3.4.5"
   }
 }
