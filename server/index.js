@@ -2,7 +2,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { getConnection } from "./db/pool.js";
-
+import authRoutes from "./routes/auth.routes.js";
+import protectedRoutes from "./routes/protected.routes.js";
 
 dotenv.config();
 
@@ -11,7 +12,12 @@ const app = express();
 /* ======================
    Middleware
 ====================== */
-app.use(cors());
+app.use(
+  cors({
+    origin:       "http://localhost:5173", // React dev server
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -44,7 +50,8 @@ app.get("/api/db-test", async (req, res) => {
 /* ======================
    Routes
 ====================== */
-// app.use("/api/auth", authRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/protected", protectedRoutes);
 // app.use("/api/users", userRoutes);
 
 /* ======================
