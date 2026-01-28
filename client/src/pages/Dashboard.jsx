@@ -1,23 +1,32 @@
-import { useNavigate } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 export default function Dashboard({ setIsAuthenticated }) {
-  const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("user"));
-
-  const handleLogout = () => {
+  const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    setIsAuthenticated(false);
-    navigate("/", { replace: true });
+    setIsAuthenticated(false); // 🔑 THIS IS THE KEY
   };
 
   return (
-    <div className="container mt-5">
-      <h1>Welcome, {user?.username}</h1>
-      <p>Role: {user?.role}</p>
-      <button className="btn btn-danger" onClick={handleLogout}>
-        Logout
-      </button>
+    <div style={{ display: "flex", minHeight: "100vh" }}>
+      <aside style={{ width: "220px", background: "#1e293b", color: "#fff", padding: "1rem" }}>
+        <h3>WRUS</h3>
+
+        <nav style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <NavLink to="permits">Permits</NavLink>
+          <NavLink to="water-users">Water Users</NavLink>
+          <NavLink to="mobile-form">Mobile Form</NavLink>
+          <NavLink to="map">Map</NavLink>
+        </nav>
+
+        <button onClick={logout} style={{ marginTop: "2rem" }}>
+          Logout
+        </button>
+      </aside>
+
+      <main style={{ flex: 1, padding: "1.5rem" }}>
+        <Outlet />
+      </main>
     </div>
   );
 }
