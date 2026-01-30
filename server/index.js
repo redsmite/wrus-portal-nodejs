@@ -9,6 +9,8 @@ import waterUsersRoutes from "./routes/waterUsers.routes.js";
 import dashboardHomeRoutes from "./routes/dashboardHome.routes.js";
 import dashboardTargetRoutes from "./routes/dashboardTarget.routes.js";
 import permitteeStatisticsRoutes from "./routes/permitteeStatistics.routes.js";
+import totalUsersRoutes from "./routes/dashboard/totalUsers.routes.js";
+import totalPermitsRoutes from "./routes/dashboard/totalPermits.routes.js";
 
 dotenv.config();
 
@@ -62,6 +64,8 @@ app.use("/api/water-users", waterUsersRoutes);
 app.use("/api/dashboard/home", dashboardHomeRoutes);
 app.use("/api/dashboard/target", dashboardTargetRoutes);
 app.use("/api/dashboard/permittee-statistics", permitteeStatisticsRoutes);
+app.use("/api/dashboard/total-users", totalUsersRoutes);
+app.use("/api/dashboard/total-permits", totalPermitsRoutes);
 
 app.get("/favicon.ico", (req, res) => res.status(204));
 

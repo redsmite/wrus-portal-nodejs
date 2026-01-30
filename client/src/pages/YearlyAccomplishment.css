@@ -20,6 +20,13 @@
   perspective: 1000px;
 }
 
+.flex-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
 .flash-card {
   width: 250px;
   min-height: 250px;
@@ -58,9 +65,9 @@
 }
 
 .flash-card-text-span {
-  font-size: "1.2rem";
-  margin-top: "0.5rem";
-  color:#10b981;
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  color: #10b981;
 }
 
 /* Back side */
@@ -97,6 +104,33 @@
   cursor: pointer;
 }
 
+/* Total Users Card */
+.total-users-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  min-width: 150px;
+  min-height: 250px;
+  text-align: center;
+  background-color: #f9f9f9;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.total-users-card span {
+  display: block;
+}
+
+.total-users-card .total-users-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4f46e5;
+}
+
 /* Chart container */
 .chart-container {
   background-color: #fff;
@@ -115,4 +149,3 @@
   padding: 1rem;
   color: #4b5563;
 }
-

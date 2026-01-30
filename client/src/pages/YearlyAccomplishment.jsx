@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
   LabelList
 } from "recharts";
+import "./YearlyAccomplishment.css";
 
 export default function YearlyAccomplishment() {
   const [summary, setSummary] = useState([]);
@@ -17,12 +18,14 @@ export default function YearlyAccomplishment() {
   const [target, setTarget] = useState(100);
   const [editing, setEditing] = useState(false);
   const [newTarget, setNewTarget] = useState(target);
+  const [totalUsers, setTotalUsers] = useState(0);
 
   const cardRef = useRef(null);
 
   useEffect(() => {
     fetchSummary();
     fetchTarget();
+    fetchTotalUsers();
   }, []);
 
   useEffect(() => {
@@ -35,6 +38,7 @@ export default function YearlyAccomplishment() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [editing]);
 
+  // Fetch yearly accomplishments
   async function fetchSummary() {
     setLoading(true);
     try {
@@ -48,6 +52,7 @@ export default function YearlyAccomplishment() {
     }
   }
 
+  // Fetch annual target
   async function fetchTarget() {
     try {
       const res = await fetch("http://localhost:5000/api/dashboard/target");
@@ -61,6 +66,18 @@ export default function YearlyAccomplishment() {
     }
   }
 
+  // Fetch total water users
+  async function fetchTotalUsers() {
+    try {
+      const res = await fetch("http://localhost:5000/api/dashboard/total-users");
+      const data = await res.json();
+      setTotalUsers(data.total_users);
+    } catch (err) {
+      console.error("Failed to fetch total users:", err);
+    }
+  }
+
+  // Save new annual target
   async function saveTarget() {
     try {
       const res = await fetch("http://localhost:5000/api/dashboard/target", {
@@ -82,9 +99,10 @@ export default function YearlyAccomplishment() {
   if (loading) return <p className="loading-text">Loading dashboard summary...</p>;
 
   return (
-    <>
-      {/* Flash Card */}
-      <div className="flash-card-wrapper">
+    <div className="dashboard-home-container">
+      {/* Flash Card + Total Users */}
+      <div className="flash-card-wrapper flex-row">
+        {/* Annual Target Flash Card */}
         <div
           ref={cardRef}
           className={`flash-card ${editing ? "flipped" : ""}`}
@@ -94,7 +112,6 @@ export default function YearlyAccomplishment() {
             <span>{new Date().getFullYear()} Annual target</span>
             <span className="flash-card-text-span">{target} Water Sources</span>
           </div>
-
           <div className="flash-card-back">
             <span>Edit Water Sources</span>
             <input
@@ -102,10 +119,16 @@ export default function YearlyAccomplishment() {
               value={newTarget}
               onChange={(e) => setNewTarget(parseInt(e.target.value || 0))}
             />
-            <div style={{ marginTop: "0.5rem" }}>
+            <div>
               <button onClick={saveTarget} className="btn-save">Save</button>
             </div>
           </div>
+        </div>
+
+        {/* Total Water Users Card */}
+        <div className="total-users-card">
+          <span>Total Water Users Inspected</span>
+          <span className="total-users-number">{totalUsers}</span>
         </div>
       </div>
 
@@ -134,6 +157,6 @@ export default function YearlyAccomplishment() {
           </ResponsiveContainer>
         </div>
       )}
-    </>
+    </div>
   );
 }
