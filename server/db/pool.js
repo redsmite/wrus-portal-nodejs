@@ -3,9 +3,6 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-/* ======================
-   Create Connection Pool
-====================== */
 const pool = mariadb.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -13,12 +10,12 @@ const pool = mariadb.createPool({
   database: process.env.DB_NAME,
   port: process.env.DB_PORT || 3306,
   connectionLimit: 5,
-  connectTimeout: 5000
+  connectTimeout: 5000,
+  // ⚠️ Important: convert BIGINT to string
+  supportBigNumbers: true,
+  bigNumberStrings: true
 });
 
-/* ======================
-   Helper: Get Connection
-====================== */
 export async function getConnection() {
   try {
     const conn = await pool.getConnection();

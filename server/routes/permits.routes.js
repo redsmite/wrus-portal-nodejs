@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
         Purpose,
         Date_App
       FROM permits
-      ORDER BY Date_App DESC
+      ORDER BY permit
     `);
 
     res.json(rows);

@@ -5,6 +5,7 @@ import { getConnection } from "./db/pool.js";
 import authRoutes from "./routes/auth.routes.js";
 import protectedRoutes from "./routes/protected.routes.js";
 import permitsRoutes from "./routes/permits.routes.js";
+import waterUsersRoutes from "./routes/waterUsers.routes.js";
 
 dotenv.config();
 
@@ -54,6 +55,7 @@ app.get("/api/db-test", async (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/protected", protectedRoutes);
 app.use("/api/permits", permitsRoutes);
+app.use("/api/water-users", waterUsersRoutes);
 
 app.get("/favicon.ico", (req, res) => res.status(204));
 
