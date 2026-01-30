@@ -1,0 +1,46 @@
+.permittee-statistics {
+  padding: 1rem;
+}
+
+.permittee-statistics .dashboard-title {
+  margin-bottom: 1rem;
+}
+
+.permittee-statistics table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.permittee-statistics th,
+.permittee-statistics td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.5rem;
+}
+
+.permittee-statistics .progress {
+  height: 24px;
+  background-color: #e9ecef;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.permittee-statistics .progress-bar {
+  background-color: gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: black;
+  min-width: 30px; /* ensures small bars can still display text */
+  transition: width 0.5s ease;
+}
+
+.permittee-statistics .progress-bar span {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
