@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { getConnection } from "./db/pool.js";
 import authRoutes from "./routes/auth.routes.js";
 import protectedRoutes from "./routes/protected.routes.js";
+import permitsRoutes from "./routes/permits.routes.js";
 
 dotenv.config();
 
@@ -52,7 +53,9 @@ app.get("/api/db-test", async (req, res) => {
 ====================== */
 app.use("/api/auth", authRoutes);
 app.use("/api/protected", protectedRoutes);
-// app.use("/api/users", userRoutes);
+app.use("/api/permits", permitsRoutes);
+
+app.get("/favicon.ico", (req, res) => res.status(204));
 
 /* ======================
    404 Handler

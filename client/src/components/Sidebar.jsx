@@ -1,6 +1,8 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Sidebar({ onLogout }) {
+  const navigate = useNavigate();
+
   const linkClass = ({ isActive }) =>
     isActive
       ? "nav-link active bg-primary text-white rounded"
@@ -11,7 +13,13 @@ export default function Sidebar({ onLogout }) {
       className="d-flex flex-column p-3"
       style={{ width: "220px", background: "#1e293b" }}
     >
-      <h3 className="text-white mb-4">WRUS Portal</h3>
+      <h3
+        className="text-white mb-4 cursor-pointer"
+        style={{ cursor: "pointer" }}
+        onClick={() => navigate("/dashboard")}
+      >
+        WRUS Portal
+      </h3>
 
       <nav className="nav nav-pills flex-column gap-2 flex-grow-1">
         <NavLink to="/dashboard/permits" className={linkClass}>
@@ -28,11 +36,7 @@ export default function Sidebar({ onLogout }) {
         </NavLink>
       </nav>
 
-      {/* Logout pinned at bottom */}
-      <button
-        onClick={onLogout}
-        className="btn btn-danger mt-3"
-      >
+      <button onClick={onLogout} className="btn btn-danger mt-3">
         Logout
       </button>
     </aside>

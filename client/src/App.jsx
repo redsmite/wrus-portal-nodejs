@@ -8,6 +8,7 @@ import Permits from "./pages/Permits.jsx";
 import WaterUsers from "./pages/WaterUsers.jsx";
 import MobileForm from "./pages/MobileForm.jsx";
 import MapPage from "./pages/MapPage.jsx";
+import DashboardHome from "./pages/DashboardHome.jsx";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -47,7 +48,7 @@ function App() {
             )
           }
         >
-          <Route index element={<Permits />} />
+          <Route index element={<DashboardHome />} /> {/* Dashboard landing */}
           <Route path="permits" element={<Permits />} />
           <Route path="water-users" element={<WaterUsers />} />
           <Route path="mobile-form" element={<MobileForm />} />
