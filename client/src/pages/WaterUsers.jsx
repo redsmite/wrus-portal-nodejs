@@ -1,45 +1,49 @@
 import { useState, useEffect, useRef } from "react";
+import "./WaterUsers.css";
 
 const PAGE_SIZE = 10;
-const DEBOUNCE_DELAY = 300; // ms
+const DEBOUNCE_DELAY = 300; // milliseconds
 
 export default function WaterUsers() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [searchTerm, setSearchTerm] = useState("");
+
+  const [inputValue, setInputValue] = useState(""); // immediate input
+  const [searchTerm, setSearchTerm] = useState(""); // debounced search
 
   const debounceRef = useRef(null);
 
+  // Fetch users whenever page or searchTerm changes
   useEffect(() => {
     fetchWaterUsers(page, searchTerm);
   }, [page, searchTerm]);
 
+  // Handle search input with debounce
   function handleSearchChange(e) {
     const value = e.target.value;
+    setInputValue(value); // immediate UI update
 
-    // Clear previous debounce
     if (debounceRef.current) clearTimeout(debounceRef.current);
 
-    // Set new debounce
     debounceRef.current = setTimeout(() => {
-      setPage(1); // reset to first page
-      setSearchTerm(value);
+      setPage(1); // reset to first page on new search
+      setSearchTerm(value); // trigger fetch
     }, DEBOUNCE_DELAY);
   }
 
   async function fetchWaterUsers(pageNumber, search) {
     setLoading(true);
     try {
-      const res = await fetch(
-        `http://localhost:5000/api/water-users?page=${pageNumber}&pageSize=${PAGE_SIZE}&search=${encodeURIComponent(
-          search
-        )}`
-      );
+      const url = `http://localhost:5000/api/water-users?page=${pageNumber}&pageSize=${PAGE_SIZE}${
+        search ? `&search=${encodeURIComponent(search)}` : ""
+      }`;
+
+      const res = await fetch(url);
       const json = await res.json();
-      setUsers(json.data);
-      setTotalPages(json.totalPages);
+      setUsers(json.data || []);
+      setTotalPages(json.totalPages || 1);
     } catch (err) {
       console.error("Failed to fetch water users:", err);
     } finally {
@@ -48,27 +52,26 @@ export default function WaterUsers() {
   }
 
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-semibold mb-4">Water Users</h2>
+    <div className="water-users-container">
+      <h2 className="water-users-title">Water Users</h2>
 
-      {/* Search Bar */}
-      <div className="mb-3">
+      <div className="search-bar">
         <input
           type="text"
           placeholder="Search by owner or location..."
-          className="form-control"
-          defaultValue={searchTerm}
+          className="search-input"
+          value={inputValue}
           onChange={handleSearchChange}
         />
       </div>
 
       {loading ? (
-        <p>Loading water users...</p>
+        <p className="loading-text">Loading water users...</p>
       ) : (
         <>
-          <div className="overflow-x-auto">
-            <table className="table table-bordered table-striped">
-              <thead className="table-light">
+          <div className="table-wrapper">
+            <table className="water-users-table">
+              <thead>
                 <tr>
                   <th>Owner</th>
                   <th>Location</th>
@@ -79,24 +82,31 @@ export default function WaterUsers() {
                 </tr>
               </thead>
               <tbody>
-                {(users || []).map((u, idx) => (
-                  <tr key={idx}>
-                    <td>{u.owner}</td>
-                    <td>{u.location}</td>
-                    <td>{u.latitude}</td>
-                    <td>{u.longitude}</td>
-                    <td>{u.type}</td>
-                    <td>{u.remarks}</td>
+                {users.length === 0 ? (
+                  <tr>
+                    <td colSpan="6" style={{ textAlign: "center" }}>
+                      No results found
+                    </td>
                   </tr>
-                ))}
+                ) : (
+                  users.map((u, idx) => (
+                    <tr key={idx} className={idx % 2 === 0 ? "row-even" : "row-odd"}>
+                      <td>{u.owner}</td>
+                      <td>{u.location}</td>
+                      <td>{u.latitude}</td>
+                      <td>{u.longitude}</td>
+                      <td>{u.type}</td>
+                      <td>{u.remarks}</td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
 
-          {/* Pagination */}
-          <div className="d-flex justify-content-between align-items-center mt-3">
+          <div className="pagination">
             <button
-              className="btn btn-secondary"
+              className="btn"
               disabled={page === 1}
               onClick={() => setPage((p) => p - 1)}
             >
@@ -106,8 +116,8 @@ export default function WaterUsers() {
               Page {page} of {totalPages}
             </span>
             <button
-              className="btn btn-secondary"
-              disabled={page === totalPages}
+              className="btn"
+              disabled={page === totalPages || totalPages === 0}
               onClick={() => setPage((p) => p + 1)}
             >
               Next ▶

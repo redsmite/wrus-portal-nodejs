@@ -1,0 +1,117 @@
+.dashboard-home-container {
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+.dashboard-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 1rem 0;
+  color: #1f2937;
+}
+
+/* Flash card container */
+.flash-card-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  margin-bottom: 1rem;
+  perspective: 1000px;
+}
+
+.flash-card {
+  width: 250px;
+  min-height: 250px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+  cursor: pointer;
+}
+
+/* flip effect */
+.flash-card.flipped {
+  transform: rotateY(180deg);
+}
+
+/* Front & back */
+.flash-card-front,
+.flash-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  font-weight: 600;
+}
+
+/* Front side */
+.flash-card-front {
+  background-color: #e0f2fe;
+  color: #1e3a8a;
+  font-size: 1.5rem;
+}
+
+.flash-card-text-span {
+  font-size: "1.2rem";
+  margin-top: "0.5rem";
+  color:#10b981;
+}
+
+/* Back side */
+.flash-card-back {
+  background-color: #4f46e5;
+  color: #fff;
+  transform: rotateY(180deg);
+  font-size: 1rem;
+}
+
+.flash-card-back input {
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+}
+
+.flash-card-back .btn-save {
+  background-color: #10b981;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.flash-card-back .btn-cancel {
+  background-color: #ef4444;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+/* Chart container */
+.chart-container {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.no-data {
+  text-align: center;
+  padding: 1rem;
+  color: #6b7280;
+}
+
+.loading-text {
+  padding: 1rem;
+  color: #4b5563;
+}

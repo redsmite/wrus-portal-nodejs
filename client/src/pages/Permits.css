@@ -1,0 +1,76 @@
+.permits-container {
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+.permits-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.search-container {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+}
+
+.permits-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.permits-table thead {
+  background-color: #f3f3f3;
+  position: sticky;
+  top: 0;
+}
+
+.permits-table th,
+.permits-table td {
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.row-even {
+  background-color: #fff;
+}
+
+.row-odd {
+  background-color: #f9f9f9;
+}
+
+.no-data {
+  text-align: center;
+  padding: 1rem;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.pagination button {
+  padding: 0.5rem 1rem;
+}
+
+.loading-text {
+  padding: 1rem;
+}

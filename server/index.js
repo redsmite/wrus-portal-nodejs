@@ -6,6 +6,9 @@ import authRoutes from "./routes/auth.routes.js";
 import protectedRoutes from "./routes/protected.routes.js";
 import permitsRoutes from "./routes/permits.routes.js";
 import waterUsersRoutes from "./routes/waterUsers.routes.js";
+import dashboardHomeRoutes from "./routes/dashboardHome.routes.js";
+import dashboardTargetRoutes from "./routes/dashboardTarget.routes.js";
+
 
 dotenv.config();
 
@@ -56,6 +59,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/protected", protectedRoutes);
 app.use("/api/permits", permitsRoutes);
 app.use("/api/water-users", waterUsersRoutes);
+app.use("/api/dashboard/home", dashboardHomeRoutes);
+app.use("/api/dashboard/target", dashboardTargetRoutes);
 
 app.get("/favicon.ico", (req, res) => res.status(204));
 

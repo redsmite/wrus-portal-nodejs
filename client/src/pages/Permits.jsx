@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./Permits.css";
 
 const PAGE_SIZE = 10;
 
@@ -24,83 +25,65 @@ export default function Permits() {
     }
   }
 
-  // Filter permits based on search term
   const filteredPermits = permits.filter((p) =>
-    Object.values(p)
-      .join(" ")
-      .toLowerCase()
-      .includes(search.toLowerCase())
+    Object.values(p).join(" ").toLowerCase().includes(search.toLowerCase())
   );
 
-  // Pagination
   const totalPages = Math.ceil(filteredPermits.length / PAGE_SIZE);
   const startIndex = (currentPage - 1) * PAGE_SIZE;
-  const currentPermits = filteredPermits.slice(
-    startIndex,
-    startIndex + PAGE_SIZE
-  );
+  const currentPermits = filteredPermits.slice(startIndex, startIndex + PAGE_SIZE);
 
-  if (loading) return <p>Loading permits...</p>;
+  if (loading) return <p className="loading-text">Loading permits...</p>;
 
   return (
-    <div style={{ padding: "1rem" }}>
-      <h2 style={{ fontSize: "1.25rem", fontWeight: "600", marginBottom: "1rem" }}>
-        Permits
-      </h2>
+    <div className="permits-container">
+      <h2 className="permits-title">Permits</h2>
 
-      {/* Search Bar */}
-      <div style={{ marginBottom: "1rem", width: "100%" }}>
+      {/* Search */}
+      <div className="search-container">
         <input
           type="text"
           placeholder="Search permits..."
           value={search}
           onChange={(e) => {
             setSearch(e.target.value);
-            setCurrentPage(1); // Reset to first page on search
+            setCurrentPage(1);
           }}
-          style={{
-            width: "100%",
-            padding: "0.5rem",
-            borderRadius: "0.25rem",
-            border: "1px solid #ccc",
-            boxSizing: "border-box",
-          }}
+          className="search-input"
         />
       </div>
 
       {/* Table */}
-      <div style={{ overflowX: "auto", border: "1px solid #ccc", borderRadius: "0.25rem" }}>
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.875rem" }}>
-          <thead style={{ backgroundColor: "#f3f3f3", position: "sticky", top: 0 }}>
+      <div className="table-wrapper">
+        <table className="permits-table">
+          <thead>
             <tr>
-              <th style={{ border: "1px solid #ccc", padding: "0.5rem" }}>Permit</th>
-              <th style={{ border: "1px solid #ccc", padding: "0.5rem" }}>Grantee</th>
-              <th style={{ border: "1px solid #ccc", padding: "0.5rem" }}>Location</th>
-              <th style={{ border: "1px solid #ccc", padding: "0.5rem" }}>Source</th>
-              <th style={{ border: "1px solid #ccc", padding: "0.5rem" }}>Type</th>
-              <th style={{ border: "1px solid #ccc", padding: "0.5rem" }}>Purpose</th>
-              <th style={{ border: "1px solid #ccc", padding: "0.5rem" }}>Date App</th>
+              <th>Permit</th>
+              <th>Grantee</th>
+              <th>Location</th>
+              <th>Source</th>
+              <th>Type</th>
+              <th>Purpose</th>
+              <th>Date App</th>
             </tr>
           </thead>
           <tbody>
             {currentPermits.length === 0 ? (
               <tr>
-                <td colSpan="7" style={{ textAlign: "center", padding: "1rem" }}>
+                <td colSpan="7" className="no-data">
                   No permits found.
                 </td>
               </tr>
             ) : (
               currentPermits.map((p, idx) => (
-                <tr key={idx} style={{ backgroundColor: idx % 2 === 0 ? "#fff" : "#f9f9f9" }}>
-                  <td style={{ border: "1px solid #ccc", padding: "0.5rem" }}>{p.Permit}</td>
-                  <td style={{ border: "1px solid #ccc", padding: "0.5rem" }}>{p.Grantee}</td>
-                  <td style={{ border: "1px solid #ccc", padding: "0.5rem" }}>{p.Location}</td>
-                  <td style={{ border: "1px solid #ccc", padding: "0.5rem" }}>{p.Source}</td>
-                  <td style={{ border: "1px solid #ccc", padding: "0.5rem" }}>{p.Type}</td>
-                  <td style={{ border: "1px solid #ccc", padding: "0.5rem" }}>{p.Purpose}</td>
-                  <td style={{ border: "1px solid #ccc", padding: "0.5rem" }}>
-                    {p.Date_App ? new Date(p.Date_App).toLocaleDateString() : ""}
-                  </td>
+                <tr key={idx} className={idx % 2 === 0 ? "row-even" : "row-odd"}>
+                  <td>{p.Permit}</td>
+                  <td>{p.Grantee}</td>
+                  <td>{p.Location}</td>
+                  <td>{p.Source}</td>
+                  <td>{p.Type}</td>
+                  <td>{p.Purpose}</td>
+                  <td>{p.Date_App ? new Date(p.Date_App).toLocaleDateString() : ""}</td>
                 </tr>
               ))
             )}
@@ -109,11 +92,10 @@ export default function Permits() {
       </div>
 
       {/* Pagination */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "1rem" }}>
+      <div className="pagination">
         <button
           disabled={currentPage === 1}
           onClick={() => setCurrentPage((p) => p - 1)}
-          style={{ padding: "0.5rem 1rem" }}
         >
           ◀ Prev
         </button>
@@ -123,7 +105,6 @@ export default function Permits() {
         <button
           disabled={currentPage === totalPages || totalPages === 0}
           onClick={() => setCurrentPage((p) => p + 1)}
-          style={{ padding: "0.5rem 1rem" }}
         >
           Next ▶
         </button>
