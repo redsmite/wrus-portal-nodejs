@@ -106,30 +106,50 @@
 
 /* Total Users Card */
 .total-users-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 1rem;
-  min-width: 150px;
+  border-radius: 12px;
+  padding: 1.5rem;
+  min-width: 180px;
   min-height: 250px;
   text-align: center;
-  background-color: #f9f9f9;
+  background: linear-gradient(135deg, #6366f1, #818cf8); /* soft gradient */
+  color: white;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1rem;
+
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.total-users-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
 }
 
 .total-users-card span {
   display: block;
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .total-users-card .total-users-number {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
-  color: #4f46e5;
+  color: #fff;
+  letter-spacing: 1px;
 }
+
+/* Optional: small icon or badge */
+.total-users-card .icon {
+  font-size: 2.5rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
 
 /* Chart container */
 .chart-container {

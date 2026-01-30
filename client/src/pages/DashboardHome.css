@@ -10,6 +10,37 @@
   color: #1f2937;
 }
 
+/* Dashboard Tabs */
+.dashboard-home-container .nav-tabs {
+  border-bottom: none; /* remove default bootstrap line */
+  display: flex;
+  gap: 1rem;
+}
+
+.dashboard-home-container .nav-item button.nav-link {
+  border: none;
+  border-radius: 12px;
+  background-color: #f3f4f6; /* light gray background */
+  color: #374151; /* dark gray text */
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.dashboard-home-container .nav-item button.nav-link:hover {
+  background-color: #e0f2fe; /* soft blue on hover */
+  color: #1e40af;
+}
+
+.dashboard-home-container .nav-item button.nav-link.active {
+  background-color: #3b82f6; /* bright blue for active */
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+  transform: translateY(-2px);
+}
+
+
 /* Flash card container */
 .flash-card-wrapper {
   display: flex;
@@ -51,17 +82,46 @@
 }
 
 /* Front side */
+/* Front side of flash card */
 .flash-card-front {
-  background-color: #e0f2fe;
+  background: linear-gradient(135deg, #bfdbfe, #93c5fd); /* soft blue gradient */
   color: #1e3a8a;
   font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 12px;
+  padding: 1.5rem;
+  min-height: 150px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  cursor: pointer;
 }
 
-.flash-card-text-span {
-  font-size: "1.2rem";
-  margin-top: "0.5rem";
-  color:#10b981;
+.flash-card-front:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #93c5fd, #60a5fa);
 }
+
+/* Text inside flash card */
+.flash-card-text-span {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
+  color: #10b981; /* bright green for highlight */
+  transition: color 0.3s ease;
+}
+
+.flash-card-front:hover .flash-card-text-span {
+  color: #047857; /* slightly darker green on hover */
+}
+
 
 /* Back side */
 .flash-card-back {

@@ -11,6 +11,11 @@ import dashboardTargetRoutes from "./routes/dashboardTarget.routes.js";
 import permitteeStatisticsRoutes from "./routes/permitteeStatistics.routes.js";
 import totalUsersRoutes from "./routes/dashboard/totalUsers.routes.js";
 import totalPermitsRoutes from "./routes/dashboard/totalPermits.routes.js";
+import waterUsersGroupedRouter from "./routes/waterUsersGrouped.js";
+import waterUsersBarangaysRouter from './routes/waterUsersBarangays.js';
+import waterUsersViewMapRouter from './routes/waterUsersViewMap.js';
+import mapCityCoordinatesRouter from './routes/mapCityCoordinates.routes.js';
+import mapBarangayCoordinatesRouter from './routes/mapBarangayCoordinates.routes.js';
 
 dotenv.config();
 
@@ -66,6 +71,11 @@ app.use("/api/dashboard/target", dashboardTargetRoutes);
 app.use("/api/dashboard/permittee-statistics", permitteeStatisticsRoutes);
 app.use("/api/dashboard/total-users", totalUsersRoutes);
 app.use("/api/dashboard/total-permits", totalPermitsRoutes);
+app.use('/api/water-users/grouped', waterUsersGroupedRouter);
+app.use('/api/water-users/barangays', waterUsersBarangaysRouter);
+app.use('/api/water-users/view-map', waterUsersViewMapRouter);
+app.use('/api/water-users/city-coordinates', mapCityCoordinatesRouter);
+app.use('/api/water-users/barangay-coordinates', mapBarangayCoordinatesRouter);
 
 app.get("/favicon.ico", (req, res) => res.status(204));
 

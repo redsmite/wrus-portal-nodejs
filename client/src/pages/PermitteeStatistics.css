@@ -44,3 +44,7 @@
   transform: translateX(-50%);
   white-space: nowrap;
 }
+
+.totalPercentage{
+  font-size: 1rem;
+}

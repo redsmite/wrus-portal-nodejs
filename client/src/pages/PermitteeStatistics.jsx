@@ -102,7 +102,7 @@ export default function PermitteeStatistics() {
                         aria-valuemax="100"
                       >
                       </div>
-                      <strong>{totals.percentage}%</strong>
+                      <strong className="totalPercentage">{totals.percentage}%</strong>
                     </div>
                   </td>
                 </tr>
