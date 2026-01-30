@@ -1,20 +1,40 @@
 import { NavLink } from "react-router-dom";
 
-export default function Sidebar() {
+export default function Sidebar({ onLogout }) {
   const linkClass = ({ isActive }) =>
     isActive
-      ? "block p-3 mb-2 bg-primary text-white rounded"
-      : "block p-3 mb-2 hover:bg-primary/50 rounded";
+      ? "nav-link active bg-primary text-white rounded"
+      : "nav-link text-white";
 
   return (
-    <div className="w-60 bg-light vh-100 p-3 shadow">
-      <h2 className="mb-4 text-center fw-bold">Admin Dashboard</h2>
-      <nav>
-        <NavLink to="/dashboard/permits" className={linkClass}>Permits</NavLink>
-        <NavLink to="/dashboard/water-users" className={linkClass}>Water Users</NavLink>
-        <NavLink to="/dashboard/mobile-form" className={linkClass}>Mobile Form</NavLink>
-        <NavLink to="/dashboard/map" className={linkClass}>Map</NavLink>
+    <aside
+      className="d-flex flex-column p-3"
+      style={{ width: "220px", background: "#1e293b" }}
+    >
+      <h3 className="text-white mb-4">WRUS Portal</h3>
+
+      <nav className="nav nav-pills flex-column gap-2 flex-grow-1">
+        <NavLink to="/dashboard/permits" className={linkClass}>
+          Permits
+        </NavLink>
+        <NavLink to="/dashboard/water-users" className={linkClass}>
+          Water Users
+        </NavLink>
+        <NavLink to="/dashboard/mobile-form" className={linkClass}>
+          Mobile Form
+        </NavLink>
+        <NavLink to="/dashboard/map" className={linkClass}>
+          Map
+        </NavLink>
       </nav>
-    </div>
+
+      {/* Logout pinned at bottom */}
+      <button
+        onClick={onLogout}
+        className="btn btn-danger mt-3"
+      >
+        Logout
+      </button>
+    </aside>
   );
 }
